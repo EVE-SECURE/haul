@@ -55,14 +55,14 @@ ui -load haul
 				call WaitForSpeedLessThan 0.20
 			}
 			
-			if ${Verbose} > 2
+			if ${Verbose}
 				call LogEcho "Does AlignTarget bookmark exist? ${EVE.Bookmark[AlignTarget](exists)}"
 			
 			if ${EVE.Bookmark[AlignTarget](exists)}
 			{	
 
 				call GetModulesInformation
-				if ${Verbose} > 1
+				if ${Verbose}
 					call LogEcho "Aligning to outbound gate."
 					
 				EVE.Bookmark[AlignTarget]:AlignTo
@@ -109,7 +109,6 @@ ui -load haul
 					if ${Verbose} > 1
 						call LogEcho "Line _LINE_: Waiting WAIT_LOOT_TIMER. Value of j is ${j}."
 					wait WAIT_LOOT_TIMER
-					EVE:CloseAllMessageBoxes
 				}
 				while ${j:Inc}<30 && ${Me.Ship.UsedCargoCapacity}<${Math.Calc[${Me.Ship.CargoCapacity}*.90]}
 			
@@ -148,7 +147,7 @@ ui -load haul
 			
 				if ${IceMining} && (${Me.Ship.UsedCargoCapacity}<${Math.Calc[${Me.Ship.CargoCapacity}*.90]})
 				{
-					if ${Verbose} > 1
+					if ${Verbose}
 					call LogEcho "Waiting ${Math.Calc[${DynamicDelay}/600]} minutes before next loot check."
 					wait ${DynamicDelay}
 				}
@@ -181,7 +180,7 @@ ui -load haul
 		
 		if ${EVE.Bookmark[AlignHaul](exists)}
 		{
-			if ${Verbose} > 1
+			if ${Verbose}
 				call LogEcho "Aligning to AlignTarget"
 				
 			EVE.Bookmark[AlignHaul]:AlignTo
